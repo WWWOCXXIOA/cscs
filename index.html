@@ -1,0 +1,1544 @@
+ <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自然拼读法学习 - 初学者入门</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="./cscs/oop.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361EE',
+                        secondary: '#FF6B6B',
+                        accent: '#FFD166',
+                        light: '#F8F9FA',
+                        dark: '#212529'
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'system-ui', 'sans-serif'],
+                        display: ['Poppins', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .phoneme-item {
+                transition: all 0.2s ease;
+            }
+            .phoneme-item:hover {
+                background-color: rgba(67, 97, 238, 0.1);
+            }
+            .progress-bar {
+                transition: width 0.5s ease-in-out;
+            }
+            .nav-link {
+                position: relative;
+            }
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: #4361EE;
+                transition: width 0.3s ease;
+            }
+            .nav-link:hover::after {
+                width: 100%;
+            }
+            .active-nav::after {
+                width: 100%;
+            }
+            .audio-icon {
+                transition: transform 0.3s ease;
+            }
+            .audio-playing .audio-icon {
+                transform: scale(1.1) rotate(10deg);
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-dark font-sans">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300" id="main-header">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-volume-up text-primary text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-display font-bold text-primary">自然拼读法学习</h1>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+            
+            <nav id="main-nav" class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="nav-link active-nav text-gray-700 hover:text-primary font-medium">首页</a>
+                <a href="#letters" class="nav-link text-gray-700 hover:text-primary font-medium">字母发音</a>
+                <a href="#vowels" class="nav-link text-gray-700 hover:text-primary font-medium">元音组合</a>
+                <a href="#consonants" class="nav-link text-gray-700 hover:text-primary font-medium">辅音组合</a>
+                <a href="#words" class="nav-link text-gray-700 hover:text-primary font-medium">单词练习</a>
+                <a href="#sentences" class="nav-link text-gray-700 hover:text-primary font-medium">句子练习</a>
+                <a href="#quiz" class="nav-link text-gray-700 hover:text-primary font-medium">小测验</a>
+            </nav>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="mobile-nav-link py-2 text-gray-700 hover:text-primary font-medium">首页</a>
+                <a href="#letters" class="mobile-nav-link py-2 text-gray-700 hover:text-primary font-medium">字母发音</a>
+                <a href="#vowels" class="mobile-nav-link py-2 text-gray-700 hover:text-primary font-medium">元音组合</a>
+                <a href="#consonants" class="mobile-nav-link py-2 text-gray-700 hover:text-primary font-medium">辅音组合</a>
+                <a href="#words" class="mobile-nav-link py-2 text-gray-700 hover:text-primary font-medium">单词练习</a>
+                <a href="#sentences" class="mobile-nav-link py-2 text-gray-700 hover:text-primary font-medium">句子练习</a>
+                <a href="#quiz" class="mobile-nav-link py-2 text-gray-700 hover:text-primary font-medium">小测验</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main>
+        <!-- 首页/欢迎区 -->
+        <section id="home" class="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-primary/10">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-dark leading-tight mb-6">
+                            轻松掌握<br><span class="text-primary">自然拼读法</span>
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                            专为初学者设计的交互式自然拼读学习平台，通过点读功能帮助你掌握英语发音规则，建立音形对应关系，为流利阅读打下坚实基础。
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#letters" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium shadow-lg shadow-primary/20 transition-all">
+                                开始学习 <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                            <a href="#how-it-works" class="bg-white hover:bg-gray-50 text-primary border border-primary px-6 py-3 rounded-lg font-medium transition-all">
+                                了解更多
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="relative w-full max-w-md">
+                            <div class="bg-white rounded-2xl shadow-2xl p-6 transform rotate-2 transition-transform hover:rotate-0 duration-300">
+                                <img src="https://picsum.photos/seed/phonics1/600/400" alt="儿童学习自然拼读" class="rounded-xl w-full h-auto mb-4">
+                                <div class="text-center">
+                                    <p class="text-gray-700 font-medium">点击任何单词或字母组合即可听到发音</p>
+                                    <div class="mt-4 inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full cursor-pointer phonetic-item" data-text="Hello, world!">
+                                        <span>Hello, world!</span>
+                                        <i class="fa fa-volume-up ml-2 audio-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-6 -left-6 bg-accent rounded-2xl shadow-xl p-4 transform -rotate-3 transition-transform hover:rotate-0 duration-300 hidden md:block">
+                                <p class="font-bold text-dark">140+ 发音组合</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 特点介绍 -->
+                <div id="how-it-works" class="mt-20">
+                    <h3 class="text-2xl md:text-3xl font-display font-bold text-center mb-12">学习方式</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa fa-mouse-pointer text-primary text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">点读学习</h4>
+                            <p class="text-gray-600">点击任何字母、单词或句子，即可听到标准发音，建立音形对应关系。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                            <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa fa-layer-group text-secondary text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">系统学习</h4>
+                            <p class="text-gray-600">从单个字母到字母组合，再到单词和句子，循序渐进掌握自然拼读规则。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                            <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa fa-check-circle text-accent text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">测验巩固</h4>
+                            <p class="text-gray-600">通过互动测验检验学习成果，强化记忆，巩固所学的发音规则。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 学习进度 -->
+                <div class="mt-20 bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-display font-bold mb-6">你的学习进度</h3>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">总体进度</span>
+                            <span class="font-medium" id="overall-progress-text">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div id="overall-progress-bar" class="progress-bar bg-primary h-4 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-600">字母发音</span>
+                                <span class="text-sm font-medium" id="letters-progress-text">0/26</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="letters-progress-bar" class="progress-bar bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-600">元音组合</span>
+                                <span class="text-sm font-medium" id="vowels-progress-text">0/80</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="vowels-progress-bar" class="progress-bar bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-600">辅音组合</span>
+                                <span class="text-sm font-medium" id="consonants-progress-text">0/60</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="consonants-progress-bar" class="progress-bar bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-600">单词与句子</span>
+                                <span class="text-sm font-medium" id="words-sentences-progress-text">0/50</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="words-sentences-progress-bar" class="progress-bar bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 字母发音部分 -->
+        <section id="letters" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-display font-bold mb-4">字母发音</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">英语有26个字母，每个字母都有其独特的发音。点击下面的字母听取它们的发音。</p>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-13 gap-4">
+                    <!-- 字母A-Z -->
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="A" data-letter="A">
+                        <div class="text-4xl font-bold text-primary mb-2">A</div>
+                        <div class="text-gray-600">/eɪ/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: apple</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="B" data-letter="B">
+                        <div class="text-4xl font-bold text-primary mb-2">B</div>
+                        <div class="text-gray-600">/biː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: ball</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="C" data-letter="C">
+                        <div class="text-4xl font-bold text-primary mb-2">C</div>
+                        <div class="text-gray-600">/siː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: cat</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="D" data-letter="D">
+                        <div class="text-4xl font-bold text-primary mb-2">D</div>
+                        <div class="text-gray-600">/diː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: dog</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="E" data-letter="E">
+                        <div class="text-4xl font-bold text-primary mb-2">E</div>
+                        <div class="text-gray-600">/iː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: egg</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="F" data-letter="F">
+                        <div class="text-4xl font-bold text-primary mb-2">F</div>
+                        <div class="text-gray-600">/ef/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: fish</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="G" data-letter="G">
+                        <div class="text-4xl font-bold text-primary mb-2">G</div>
+                        <div class="text-gray-600">/dʒiː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: goat</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="H" data-letter="H">
+                        <div class="text-4xl font-bold text-primary mb-2">H</div>
+                        <div class="text-gray-600">/eɪtʃ/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: hat</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="I" data-letter="I">
+                        <div class="text-4xl font-bold text-primary mb-2">I</div>
+                        <div class="text-gray-600">/aɪ/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: igloo</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="J" data-letter="J">
+                        <div class="text-4xl font-bold text-primary mb-2">J</div>
+                        <div class="text-gray-600">/dʒeɪ/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: jump</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="K" data-letter="K">
+                        <div class="text-4xl font-bold text-primary mb-2">K</div>
+                        <div class="text-gray-600">/keɪ/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: cat</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="L" data-letter="L">
+                        <div class="text-4xl font-bold text-primary mb-2">L</div>
+                        <div class="text-gray-600">/el/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: lion</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="M" data-letter="M">
+                        <div class="text-4xl font-bold text-primary mb-2">M</div>
+                        <div class="text-gray-600">/em/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: monkey</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="N" data-letter="N">
+                        <div class="text-4xl font-bold text-primary mb-2">N</div>
+                        <div class="text-gray-600">/en/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: nose</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="O" data-letter="O">
+                        <div class="text-4xl font-bold text-primary mb-2">O</div>
+                        <div class="text-gray-600">/oʊ/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: orange</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="P" data-letter="P">
+                        <div class="text-4xl font-bold text-primary mb-2">P</div>
+                        <div class="text-gray-600">/piː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: pig</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="Q" data-letter="Q">
+                        <div class="text-4xl font-bold text-primary mb-2">Q</div>
+                        <div class="text-gray-600">/kjuː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: queen</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="R" data-letter="R">
+                        <div class="text-4xl font-bold text-primary mb-2">R</div>
+                        <div class="text-gray-600">/ɑːr/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: rabbit</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="S" data-letter="S">
+                        <div class="text-4xl font-bold text-primary mb-2">S</div>
+                        <div class="text-gray-600">/es/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: sun</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="T" data-letter="T">
+                        <div class="text-4xl font-bold text-primary mb-2">T</div>
+                        <div class="text-gray-600">/tiː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: tiger</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="U" data-letter="U">
+                        <div class="text-4xl font-bold text-primary mb-2">U</div>
+                        <div class="text-gray-600">/juː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: umbrella</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="V" data-letter="V">
+                        <div class="text-4xl font-bold text-primary mb-2">V</div>
+                        <div class="text-gray-600">/viː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: van</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="W" data-letter="W">
+                        <div class="text-4xl font-bold text-primary mb-2">W</div>
+                        <div class="text-gray-600">/ˈdʌbljuː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: water</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="X" data-letter="X">
+                        <div class="text-4xl font-bold text-primary mb-2">X</div>
+                        <div class="text-gray-600">/eks/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: box</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="Y" data-letter="Y">
+                        <div class="text-4xl font-bold text-primary mb-2">Y</div>
+                        <div class="text-gray-600">/waɪ/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: yellow</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4 text-center card-hover phonetic-item" data-text="Z" data-letter="Z">
+                        <div class="text-4xl font-bold text-primary mb-2">Z</div>
+                        <div class="text-gray-600">/ziː/</div>
+                        <div class="mt-2 text-sm text-gray-500">如: zebra</div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 bg-primary/5 rounded-2xl p-6 md:p-8">
+                    <h3 class="text-2xl font-display font-bold mb-6">字母发音小知识</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-xl font-bold mb-3 flex items-center">
+                                <i class="fa fa-info-circle text-primary mr-2"></i>
+                                元音字母
+                            </h4>
+                            <p class="text-gray-600 mb-4">英语中有5个元音字母：A, E, I, O, U。有时候Y也会作为元音字母使用。</p>
+                            <p class="text-gray-600">元音字母有长音和短音两种基本发音，例如：</p>
+                            <ul class="mt-3 space-y-2">
+                                <li class="flex items-center">
+                                    <span class="font-medium mr-2">A:</span>
+                                    <span class="mr-4 phonetic-item" data-text="cat">cat (/æ/ 短音)</span>
+                                    <span class="phonetic-item" data-text="cake">cake (/eɪ/ 长音)</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="font-medium mr-2">E:</span>
+                                    <span class="mr-4 phonetic-item" data-text="bed">bed (/e/ 短音)</span>
+                                    <span class="phonetic-item" data-text="bee">bee (/iː/ 长音)</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="font-medium mr-2">I:</span>
+                                    <span class="mr-4 phonetic-item" data-text="sit">sit (/ɪ/ 短音)</span>
+                                    <span class="phonetic-item" data-text="bike">bike (/aɪ/ 长音)</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="font-medium mr-2">O:</span>
+                                    <span class="mr-4 phonetic-item" data-text="hot">hot (/ɒ/ 短音)</span>
+                                    <span class="phonetic-item" data-text="home">home (/oʊ/ 长音)</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="font-medium mr-2">U:</span>
+                                    <span class="mr-4 phonetic-item" data-text="cup">cup (/ʌ/ 短音)</span>
+                                    <span class="phonetic-item" data-text="cube">cube (/juː/ 长音)</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-3 flex items-center">
+                                <i class="fa fa-info-circle text-primary mr-2"></i>
+                                辅音字母
+                            </h4>
+                            <p class="text-gray-600 mb-4">除了元音字母之外的都是辅音字母。辅音字母的发音通常比较固定，但也有一些例外。</p>
+                            <p class="text-gray-600 mb-3">一些常见的发音规则：</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                    <span>C在e, i, y前通常发/s/音，如 <span class="phonetic-item" data-text="city">city</span>；其他情况通常发/k/音，如 <span class="phonetic-item" data-text="cat">cat</span>。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                    <span>G在e, i, y前有时发/dʒ/音，如 <span class="phonetic-item" data-text="giant">giant</span>；其他情况通常发/ɡ/音，如 <span class="phonetic-item" data-text="goat">goat</span>。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                    <span>S有时发/z/音，尤其是在两个元音之间，如 <span class="phonetic-item" data-text="rose">rose</span>。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                    <span>X通常发/ks/音，如 <span class="phonetic-item" data-text="box">box</span>。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 元音组合部分 -->
+        <section id="vowels" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-display font-bold mb-4">元音组合</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">元音字母常常组合在一起形成特定的发音。点击下面的元音组合听取它们的发音。</p>
+                </div>
+                
+                <!-- 元音组合分类标签 -->
+                <div class="flex flex-wrap justify-center gap-2 mb-10 vowel-category-tabs">
+                    <button class="vowel-tab active px-4 py-2 rounded-full bg-primary text-white font-medium" data-category="all">全部</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="aa">AA组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="ae">AE组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="ai">AI组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="ao">AO组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="au">AU组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="aw">AW组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="ea">EA组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="ee">EE组合</button>
+                    <button class="vowel-tab px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-medium transition-colors" data-category="其他">其他组合</button>
+                </div>
+                
+                <!-- 元音组合列表 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- AA组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="aa">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="aa">aa</div>
+                            <div class="text-gray-500">/ɑː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="father">father (父亲)</li>
+                            <li class="phonetic-item" data-text="bath">bath (浴室)</li>
+                            <li class="phonetic-item" data-text="class">class (班级)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AE组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ae">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ae">ae</div>
+                            <div class="text-gray-500">/iː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="aeon">aeon (永世)</li>
+                            <li class="phonetic-item" data-text="aerial">aerial (空中的)</li>
+                            <li class="phonetic-item" data-text="aeroplane">aeroplane (飞机)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AI组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ai">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ai">ai</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="rain">rain (雨)</li>
+                            <li class="phonetic-item" data-text="wait">wait (等待)</li>
+                            <li class="phonetic-item" data-text="paint">paint (绘画)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ai">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="aigh">aigh</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="straight">straight (直的)</li>
+                            <li class="phonetic-item" data-text="weight">weight (重量)</li>
+                            <li class="phonetic-item" data-text="height">height (高度)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AO组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ao">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ao">ao</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="aoe">aoe (字母组合)</li>
+                            <li class="phonetic-item" data-text="aorta">aorta (主动脉)</li>
+                            <li class="phonetic-item" data-text="apao">apao (一种食物)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AU组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="au">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="au">au</div>
+                            <div class="text-gray-500">/ɔː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="autumn">autumn (秋天)</li>
+                            <li class="phonetic-item" data-text="author">author (作者)</li>
+                            <li class="phonetic-item" data-text="cause">cause (原因)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AW组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="aw">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="aw">aw</div>
+                            <div class="text-gray-500">/ɔː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="saw">saw (锯子)</li>
+                            <li class="phonetic-item" data-text="law">law (法律)</li>
+                            <li class="phonetic-item" data-text="draw">draw (画画)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- EA组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ea">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ea">ea</div>
+                            <div class="text-gray-500">/iː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="eat">eat (吃)</li>
+                            <li class="phonetic-item" data-text="meat">meat (肉)</li>
+                            <li class="phonetic-item" data-text="sea">sea (海)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ea">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ea">ea</div>
+                            <div class="text-gray-500">/e/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="head">head (头)</li>
+                            <li class="phonetic-item" data-text="bread">bread (面包)</li>
+                            <li class="phonetic-item" data-text="dead">dead (死的)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ea">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ea">ea</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="great">great (伟大的)</li>
+                            <li class="phonetic-item" data-text="break">break (打破)</li>
+                            <li class="phonetic-item" data-text="steak">steak (牛排)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- EE组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="ee">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ee">ee</div>
+                            <div class="text-gray-500">/iː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="see">see (看见)</li>
+                            <li class="phonetic-item" data-text="bee">bee (蜜蜂)</li>
+                            <li class="phonetic-item" data-text="tree">tree (树)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- EO组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="eo">eo</div>
+                            <div class="text-gray-500">/iː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="people">people (人们)</li>
+                            <li class="phonetic-item" data-text="seize">seize (抓住)</li>
+                            <li class="phonetic-item" data-text="receive">receive (收到)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- EW组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ew">ew</div>
+                            <div class="text-gray-500">/juː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="new">new (新的)</li>
+                            <li class="phonetic-item" data-text="few">few (少数)</li>
+                            <li class="phonetic-item" data-text="view">view (观点)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ew">ew</div>
+                            <div class="text-gray-500">/uː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="flew">flew (飞，过去式)</li>
+                            <li class="phonetic-item" data-text="blew">blew (吹，过去式)</li>
+                            <li class="phonetic-item" data-text="crew">crew (全体船员)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- IE组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ie">ie</div>
+                            <div class="text-gray-500">/iː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="piece">piece (片)</li>
+                            <li class="phonetic-item" data-text="field">field (田野)</li>
+                            <li class="phonetic-item" data-text="thief">thief (小偷)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- EI组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ei">ei</div>
+                            <div class="text-gray-500">/iː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="receive">receive (收到)</li>
+                            <li class="phonetic-item" data-text="ceiling">ceiling (天花板)</li>
+                            <li class="phonetic-item" data-text="conceit">conceit (自负)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- EU组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="eu">eu</div>
+                            <div class="text-gray-500">/juː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="europe">europe (欧洲)</li>
+                            <li class="phonetic-item" data-text="european">european (欧洲的)</li>
+                            <li class="phonetic-item" data-text="eulogy">eulogy (颂词)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- IA组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ia">ia</div>
+                            <div class="text-gray-500">/aɪə/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="bias">bias (偏见)</li>
+                            <li class="phonetic-item" data-text="dial">dial (表盘)</li>
+                            <li class="phonetic-item" data-text="giant">giant (巨人)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- IO组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="io">io</div>
+                            <div class="text-gray-500">/aɪə/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="lion">lion (狮子)</li>
+                            <li class="phonetic-item" data-text="violin">violin (小提琴)</li>
+                            <li class="phonetic-item" data-text="bias">bias (偏见)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- OA组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="oa">oa</div>
+                            <div class="text-gray-500">/oʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="boat">boat (船)</li>
+                            <li class="phonetic-item" data-text="coat">coat (外套)</li>
+                            <li class="phonetic-item" data-text="road">road (路)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- OO组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="oo">oo</div>
+                            <div class="text-gray-500">/uː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="moon">moon (月亮)</li>
+                            <li class="phonetic-item" data-text="spoon">spoon (勺子)</li>
+                            <li class="phonetic-item" data-text="school">school (学校)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="oo">oo</div>
+                            <div class="text-gray-500">/ʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="book">book (书)</li>
+                            <li class="phonetic-item" data-text="look">look (看)</li>
+                            <li class="phonetic-item" data-text="cook">cook (烹饪)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- OI组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="oi">oi</div>
+                            <div class="text-gray-500">/ɔɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="oil">oil (油)</li>
+                            <li class="phonetic-item" data-text="coin">coin (硬币)</li>
+                            <li class="phonetic-item" data-text="noise">noise (噪音)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- OY组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="oy">oy</div>
+                            <div class="text-gray-500">/ɔɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="boy">boy (男孩)</li>
+                            <li class="phonetic-item" data-text="toy">toy (玩具)</li>
+                            <li class="phonetic-item" data-text="joy">joy (欢乐)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- OU组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ou">ou</div>
+                            <div class="text-gray-500">/aʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="out">out (外面)</li>
+                            <li class="phonetic-item" data-text="house">house (房子)</li>
+                            <li class="phonetic-item" data-text="mouth">mouth (嘴)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ou">ou</div>
+                            <div class="text-gray-500">/ʌ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="country">country (国家)</li>
+                            <li class="phonetic-item" data-text="touch">touch (触摸)</li>
+                            <li class="phonetic-item" data-text="enough">enough (足够)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- OW组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ow">ow</div>
+                            <div class="text-gray-500">/aʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="cow">cow (奶牛)</li>
+                            <li class="phonetic-item" data-text="how">how (如何)</li>
+                            <li class="phonetic-item" data-text="now">now (现在)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ow">ow</div>
+                            <div class="text-gray-500">/oʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="snow">snow (雪)</li>
+                            <li class="phonetic-item" data-text="slow">slow (慢的)</li>
+                            <li class="phonetic-item" data-text="window">window (窗户)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- UI组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ui">ui</div>
+                            <div class="text-gray-500">/juːɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="quiz">quiz (测验)</li>
+                            <li class="phonetic-item" data-text="quick">quick (快的)</li>
+                            <li class="phonetic-item" data-text="liquid">liquid (液体)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- UE组合 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ue">ue</div>
+                            <div class="text-gray-500">/juː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="cube">cube (立方体)</li>
+                            <li class="phonetic-item" data-text="tube">tube (管子)</li>
+                            <li class="phonetic-item" data-text="tune">tune (曲调)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 元音+辅音+不发音e -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="a_e">a_e</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="cake">cake (蛋糕)</li>
+                            <li class="phonetic-item" data-text="make">make (制作)</li>
+                            <li class="phonetic-item" data-text="lake">lake (湖)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="e_e">e_e</div>
+                            <div class="text-gray-500">/iː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="eve">eve (前夕)</li>
+                            <li class="phonetic-item" data-text="scene">scene (场景)</li>
+                            <li class="phonetic-item" data-text="theme">theme (主题)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="i_e">i_e</div>
+                            <div class="text-gray-500">/aɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="like">like (喜欢)</li>
+                            <li class="phonetic-item" data-text="bike">bike (自行车)</li>
+                            <li class="phonetic-item" data-text="kite">kite (风筝)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="o_e">o_e</div>
+                            <div class="text-gray-500">/oʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="home">home (家)</li>
+                            <li class="phonetic-item" data-text="note">note (笔记)</li>
+                            <li class="phonetic-item" data-text="code">code (代码)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="u_e">u_e</div>
+                            <div class="text-gray-500">/juː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="use">use (使用)</li>
+                            <li class="phonetic-item" data-text="mute">mute (静音)</li>
+                            <li class="phonetic-item" data-text="cute">cute (可爱的)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 更多元音组合 - 第一组 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="air">air</div>
+                            <div class="text-gray-500">/eər/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="air">air (空气)</li>
+                            <li class="phonetic-item" data-text="hair">hair (头发)</li>
+                            <li class="phonetic-item" data-text="chair">chair (椅子)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ear">ear</div>
+                            <div class="text-gray-500">/ɪər/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="ear">ear (耳朵)</li>
+                            <li class="phonetic-item" data-text="hear">hear (听见)</li>
+                            <li class="phonetic-item" data-text="clear">clear (清楚的)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ear">ear</div>
+                            <div class="text-gray-500">/ɜːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="earth">earth (地球)</li>
+                            <li class="phonetic-item" data-text="learn">learn (学习)</li>
+                            <li class="phonetic-item" data-text="heard">heard (听见，过去式)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="eer">eer</div>
+                            <div class="text-gray-500">/ɪər/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="deer">deer (鹿)</li>
+                            <li class="phonetic-item" data-text="beer">beer (啤酒)</li>
+                            <li class="phonetic-item" data-text="engineer">engineer (工程师)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ere">ere</div>
+                            <div class="text-gray-500">/ɪər/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="here">here (这里)</li>
+                            <li class="phonetic-item" data-text="mere">mere (仅仅)</li>
+                            <li class="phonetic-item" data-text="severe">severe (严重的)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ere">ere</div>
+                            <div class="text-gray-500">/er/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="there">there (那里)</li>
+                            <li class="phonetic-item" data-text="where">where (哪里)</li>
+                            <li class="phonetic-item" data-text="therefore">therefore (因此)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ire">ire</div>
+                            <div class="text-gray-500">/aɪər/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="fire">fire (火)</li>
+                            <li class="phonetic-item" data-text="tire">tire (轮胎)</li>
+                            <li class="phonetic-item" data-text="hire">hire (雇佣)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="oor">oor</div>
+                            <div class="text-gray-500">/ɔːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="door">door (门)</li>
+                            <li class="phonetic-item" data-text="floor">floor (地板)</li>
+                            <li class="phonetic-item" data-text="moor">moor (沼泽)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ore">ore</div>
+                            <div class="text-gray-500">/ɔːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="more">more (更多)</li>
+                            <li class="phonetic-item" data-text="core">core (核心)</li>
+                            <li class="phonetic-item" data-text="bore">bore (钻孔)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="our">our</div>
+                            <div class="text-gray-500">/aʊər/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="our">our (我们的)</li>
+                            <li class="phonetic-item" data-text="hour">hour (小时)</li>
+                            <li class="phonetic-item" data-text="flower">flower (花)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="our">our</div>
+                            <div class="text-gray-500">/ɔːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="four">four (四)</li>
+                            <li class="phonetic-item" data-text="course">course (课程)</li>
+                            <li class="phonetic-item" data-text="your">your (你的)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ure">ure</div>
+                            <div class="text-gray-500">/jʊər/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="pure">pure (纯的)</li>
+                            <li class="phonetic-item" data-text="cure">cure (治愈)</li>
+                            <li class="phonetic-item" data-text="sure">sure (确定的)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ar">ar</div>
+                            <div class="text-gray-500">/ɑːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="car">car (汽车)</li>
+                            <li class="phonetic-item" data-text="far">far (远的)</li>
+                            <li class="phonetic-item" data-text="park">park (公园)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="er">er</div>
+                            <div class="text-gray-500">/ɜːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="her">her (她的)</li>
+                            <li class="phonetic-item" data-text="term">term (学期)</li>
+                            <li class="phonetic-item" data-text="serve">serve (服务)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 更多元音组合 - 第二组 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ir">ir</div>
+                            <div class="text-gray-500">/ɜːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="bird">bird (鸟)</li>
+                            <li class="phonetic-item" data-text="first">first (第一)</li>
+                            <li class="phonetic-item" data-text="girl">girl (女孩)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="or">or</div>
+                            <div class="text-gray-500">/ɔːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="or">or (或者)</li>
+                            <li class="phonetic-item" data-text="for">for (为了)</li>
+                            <li class="phonetic-item" data-text="horse">horse (马)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ur">ur</div>
+                            <div class="text-gray-500">/ɜːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="turn">turn (转动)</li>
+                            <li class="phonetic-item" data-text="burn">burn (燃烧)</li>
+                            <li class="phonetic-item" data-text="nurse">nurse (护士)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="al">al</div>
+                            <div class="text-gray-500">/ɔːl/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="all">all (全部)</li>
+                            <li class="phonetic-item" data-text="ball">ball (球)</li>
+                            <li class="phonetic-item" data-text="wall">wall (墙)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="alk">alk</div>
+                            <div class="text-gray-500">/ɔːk/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="talk">talk (谈话)</li>
+                            <li class="phonetic-item" data-text="walk">walk (步行)</li>
+                            <li class="phonetic-item" data-text="chalk">chalk (粉笔)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="augh">augh</div>
+                            <div class="text-gray-500">/ɔː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="caught">caught (抓住，过去式)</li>
+                            <li class="phonetic-item" data-text="taught">taught (教，过去式)</li>
+                            <li class="phonetic-item" data-text="daughter">daughter (女儿)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ough">ough</div>
+                            <div class="text-gray-500">/oʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="though">though (虽然)</li>
+                            <li class="phonetic-item" data-text="although">although (尽管)</li>
+                            <li class="phonetic-item" data-text="dough">dough (生面团)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ough">ough</div>
+                            <div class="text-gray-500">/aʊ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="though">though (虽然)</li>
+                            <li class="phonetic-item" data-text="bough">bough (树枝)</li>
+                            <li class="phonetic-item" data-text="plough">plough (犁)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ough">ough</div>
+                            <div class="text-gray-500">/ʌf/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="tough">tough (坚韧的)</li>
+                            <li class="phonetic-item" data-text="rough">rough (粗糙的)</li>
+                            <li class="phonetic-item" data-text="enough">enough (足够)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="igh">igh</div>
+                            <div class="text-gray-500">/aɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="high">high (高的)</li>
+                            <li class="phonetic-item" data-text="night">night (夜晚)</li>
+                            <li class="phonetic-item" data-text="light">light (光)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="old">old</div>
+                            <div class="text-gray-500">/oʊld/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="old">old (老的)</li>
+                            <li class="phonetic-item" data-text="cold">cold (冷的)</li>
+                            <li class="phonetic-item" data-text="hold">hold (握住)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ost">ost</div>
+                            <div class="text-gray-500">/oʊst/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="most">most (大多数)</li>
+                            <li class="phonetic-item" data-text="post">post (邮递)</li>
+                            <li class="phonetic-item" data-text="host">host (主人)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ould">ould</div>
+                            <div class="text-gray-500">/ʊd/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="could">could (能)</li>
+                            <li class="phonetic-item" data-text="would">would (会)</li>
+                            <li class="phonetic-item" data-text="should">should (应该)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="y">y</div>
+                            <div class="text-gray-500">/aɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="my">my (我的)</li>
+                            <li class="phonetic-item" data-text="sky">sky (天空)</li>
+                            <li class="phonetic-item" data-text="fly">fly (飞)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 更多元音组合 - 第三组 -->
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="y">y</div>
+                            <div class="text-gray-500">/ɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="happy">happy (快乐的)</li>
+                            <li class="phonetic-item" data-text="baby">baby (婴儿)</li>
+                            <li class="phonetic-item" data-text="city">city (城市)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ay">ay</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="day">day (天)</li>
+                            <li class="phonetic-item" data-text="say">say (说)</li>
+                            <li class="phonetic-item" data-text="play">play (玩)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ey">ey</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="they">they (他们)</li>
+                            <li class="phonetic-item" data-text="grey">grey (灰色)</li>
+                            <li class="phonetic-item" data-text="hey">hey (嘿)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ey">ey</div>
+                            <div class="text-gray-500">/aɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="eye">eye (眼睛)</li>
+                            <li class="phonetic-item" data-text="dye">dye (染料)</li>
+                            <li class="phonetic-item" data-text="aye">aye (赞成)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ei">ei</div>
+                            <div class="text-gray-500">/eɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="eight">eight (八)</li>
+                            <li class="phonetic-item" data-text="weight">weight (重量)</li>
+                            <li class="phonetic-item" data-text="sleigh">sleigh (雪橇)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ie">ie</div>
+                            <div class="text-gray-500">/aɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="die">die (死亡)</li>
+                            <li class="phonetic-item" data-text="lie">lie (躺)</li>
+                            <li class="phonetic-item" data-text="tie">tie (领带)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ue">ue</div>
+                            <div class="text-gray-500">/uː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="blue">blue (蓝色)</li>
+                            <li class="phonetic-item" data-text="glue">glue (胶水)</li>
+                            <li class="phonetic-item" data-text="clue">clue (线索)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="ui">ui</div>
+                            <div class="text-gray-500">/uːɪ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="fruit">fruit (水果)</li>
+                            <li class="phonetic-item" data-text="juice">juice (果汁)</li>
+                            <li class="phonetic-item" data-text="suit">suit (套装)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="oo">oo</div>
+                            <div class="text-gray-500">/ʌ/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="flood">flood (洪水)</li>
+                            <li class="phonetic-item" data-text="blood">blood (血液)</li>
+                            <li class="phonetic-item" data-text="flooding">flooding (洪水)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="augh">augh</div>
+                            <div class="text-gray-500">/ɑːf/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="laugh">laugh (笑)</li>
+                            <li class="phonetic-item" data-text="laughter">laughter (笑声)</li>
+                            <li class="phonetic-item" data-text="draught">draught (气流)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="aw">aw</div>
+                            <div class="text-gray-500">/ɔː/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="paw">paw (爪子)</li>
+                            <li class="phonetic-item" data-text="straw">straw (稻草)</li>
+                            <li class="phonetic-item" data-text="drawer">drawer (抽屉)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="war">war</div>
+                            <div class="text-gray-500">/wɔːr/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="war">war (战争)</li>
+                            <li class="phonetic-item" data-text="warm">warm (温暖的)</li>
+                            <li class="phonetic-item" data-text="warn">warn (警告)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-2xl font-bold text-primary phonetic-item" data-text="qu">qu</div>
+                            <div class="text-gray-500">/kw/</div>
+                        </div>
+                        <p class="text-gray-600 mb-3">示例单词：</p>
+                        <ul class="space-y-1">
+                            <li class="phonetic-item" data-text="queen">queen (女王)</li>
+                            <li class="phonetic-item" data-text="quick">quick (快的)</li>
+                            <li class="phonetic-item" data-text="quiet">quiet (安静的)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                        <div class="flex justify-between items-center mb-3">
+ <div class="text-2xl font-bold text-primary phonetic-item" data-text="wr">wr</div>
+                        <div class="text-gray-500">/r/</div>
+                    </div>
+                    <p class="text-gray-600 mb-3">示例单词：</p>
+                    <ul class="space-y-1">
+                        <li class="phonetic-item" data-text="write">write (写)</li>
+                        <li class="phonetic-item" data-text="wrong">wrong (错误的)</li>
+                        <li class="phonetic-item" data-text="wrap">wrap (包裹)</li>
+                    </ul>
+                </div>
+                
+                <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="text-2xl font-bold text-primary phonetic-item" data-text="kn">kn</div>
+                        <div class="text-gray-500">/n/</div>
+                    </div>
+                    <p class="text-gray-600 mb-3">示例单词：</p>
+                    <ul class="space-y-1">
+                        <li class="phonetic-item" data-text="know">know (知道)</li>
+                        <li class="phonetic-item" data-text="knife">knife (刀)</li>
+                        <li class="phonetic-item" data-text="knee">knee (膝盖)</li>
+                    </ul>
+                </div>
+                
+                <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="text-2xl font-bold text-primary phonetic-item" data-text="gh">gh</div>
+                        <div class="text-gray-500">不发音</div>
+                    </div>
+                    <p class="text-gray-600 mb-3">示例单词：</p>
+                    <ul class="space-y-1">
+                        <li class="phonetic-item" data-text="night">night (夜晚)</li>
+                        <li class="phonetic-item" data-text="light">light (光)</li>
+                        <li class="phonetic-item" data-text="high">high (高的)</li>
+                    </ul>
+                </div>
+                
+                <div class="vowel-item bg-white rounded-xl p-5 shadow-md card-hover" data-category="其他">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="text-2xl font-bold text-primary phonetic-item" data-text="gh">gh</div>
+                        <div class="text-gray-500">/f/</div>
+                    </div>
+                    <p class="text-gray-600 mb-3">示例单词：</p>
+                    <ul class="space-y-1">
+                        <li class="phonetic-item" data-text="laugh">laugh (笑)</li>
+                        <li class="phonetic-item" data-text="cough">cough (咳嗽)</li>
+                        <li class="phonetic-item" data-text="tough">tough (坚韧的)</li>
+                    </ul>
+                </div>
+    
