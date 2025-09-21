@@ -1,0 +1,2508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自然拼读法学习 - 初学者入门</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#F97316',
+                        accent: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .pronunciation-btn {
+                @apply bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-full transition-all duration-300;
+            }
+            .section-title {
+                @apply text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-6 pb-2 border-b-2 border-primary/30;
+            }
+            .category-title {
+                @apply text-[clamp(1.2rem,2vw,1.8rem)] font-semibold text-dark mt-8 mb-4;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 text-gray-800">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between">
+            <div class="flex items-center">
+                <i class="fa fa-book text-primary text-3xl mr-3"></i>
+                <h1 class="text-2xl font-bold text-dark">自然拼读法学习</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#intro" class="hover:text-primary transition-colors">简介</a>
+                <a href="#vowels" class="hover:text-primary transition-colors">元音组合</a>
+                <a href="#consonants" class="hover:text-primary transition-colors">辅音组合</a>
+                <a href="#practice" class="hover:text-primary transition-colors">练习</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fa fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#intro" class="py-2 hover:text-primary transition-colors">简介</a>
+                <a href="#vowels" class="py-2 hover:text-primary transition-colors">元音组合</a>
+                <a href="#consonants" class="py-2 hover:text-primary transition-colors">辅音组合</a>
+                <a href="#practice" class="py-2 hover:text-primary transition-colors">练习</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="bg-gradient-to-r from-primary to-blue-700 text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6 text-shadow">自然拼读法入门</h2>
+            <p class="text-[clamp(1rem,2vw,1.25rem)] max-w-2xl mx-auto mb-8 opacity-90">
+                为初学者设计的英语发音学习工具，通过点读功能帮助你掌握字母组合的发音规则
+            </p>
+            <a href="#vowels" class="inline-block bg-white text-primary font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                开始学习 <i class="fa fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 简介部分 -->
+        <section id="intro" class="mb-16">
+            <h2 class="section-title">什么是自然拼读法？</h2>
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <p class="mb-4 text-lg">自然拼读法（Phonics）是一种通过字母和字母组合的发音规则来学习英语发音的方法。它帮助学习者建立字母与发音之间的联系，从而能够更轻松地朗读和拼写单词。</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fa fa-check-circle text-accent text-2xl mr-3"></i>
+                            <h3 class="text-xl font-semibold">为什么学习自然拼读？</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>帮助你看到单词就能读出来</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>提高单词记忆效率和拼写能力</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>增强听力理解和口语表达能力</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>为阅读和写作打下坚实基础</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fa fa-lightbulb-o text-secondary text-2xl mr-3"></i>
+                            <h3 class="text-xl font-semibold">如何使用本网站？</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>点击 <i class="fa fa-volume-up text-primary"></i> 图标听取发音</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>学习字母组合的发音规则和示例</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>通过练习部分巩固所学知识</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>反复练习，逐步掌握自然拼读规则</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 元音组合部分 -->
+        <section id="vowels" class="mb-16">
+            <h2 class="section-title">元音组合</h2>
+            <p class="text-lg mb-8">元音组合是英语发音中比较复杂的部分，下面是常见的元音组合及其发音规则。点击每个组合或单词旁边的喇叭图标听取发音。</p>
+
+            <!-- 短元音 -->
+            <div class="mb-10">
+                <h3 class="category-title">短元音 (Short Vowels)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 短元音组合 1 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">a</span>
+                            <button class="pronunciation-btn" onclick="speak('a')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "猫" (cat) 中的 a</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">cat</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cat')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">hat</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('hat')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">bat</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('bat')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The cat is on the mat.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The cat is on the mat.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 短元音组合 2 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">e</span>
+                            <button class="pronunciation-btn" onclick="speak('e')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "床" (bed) 中的 e</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">bed</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('bed')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">red</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('red')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">pen</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('pen')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The red pen is on the bed.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The red pen is on the bed.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 短元音组合 3 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">i</span>
+                            <button class="pronunciation-btn" onclick="speak('i')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "猪" (pig) 中的 i</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">pig</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('pig')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">big</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('big')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">sit</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('sit')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The big pig can sit.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The big pig can sit.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 短元音组合 4 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">o</span>
+                            <button class="pronunciation-btn" onclick="speak('o')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "狗" (dog) 中的 o</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">dog</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('dog')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">hot</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('hot')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">pot</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('pot')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The hot dog is in the pot.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The hot dog is in the pot.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 短元音组合 5 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">u</span>
+                            <button class="pronunciation-btn" onclick="speak('u')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "杯子" (cup) 中的 u</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">cup</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cup')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">sun</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('sun')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">run</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('run')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Run to the sun with a cup.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Run to the sun with a cup.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 长元音 -->
+            <div class="mb-10">
+                <h3 class="category-title">长元音 (Long Vowels)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 长元音组合 1 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">a-e</span>
+                            <button class="pronunciation-btn" onclick="speak('a-e')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "蛋糕" (cake) 中的 a-e</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">cake</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cake')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">make</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('make')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">lake</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('lake')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: We can make a cake by the lake.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('We can make a cake by the lake.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 2 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ai</span>
+                            <button class="pronunciation-btn" onclick="speak('ai')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "雨" (rain) 中的 ai</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">rain</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('rain')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">mail</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('mail')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">pain</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('pain')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The rain will mail us some pain.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The rain will mail us some pain.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 3 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ay</span>
+                            <button class="pronunciation-btn" onclick="speak('ay')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "白天" (day) 中的 ay</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">day</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('day')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">say</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('say')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">play</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('play')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: We can play all day and say hello.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('We can play all day and say hello.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 4 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">e-e</span>
+                            <button class="pronunciation-btn" onclick="speak('e-e')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "蜜蜂" (bee) 中的 e-e</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">bee</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('bee')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">see</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('see')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">tree</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('tree')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: I see a bee in the tree.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('I see a bee in the tree.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 5 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ea</span>
+                            <button class="pronunciation-btn" onclick="speak('ea')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "肉" (meat) 中的 ea</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">meat</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('meat')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">teach</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('teach')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">read</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('read')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: I read to teach about meat.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('I read to teach about meat.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 6 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ee</span>
+                            <button class="pronunciation-btn" onclick="speak('ee')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 " feet" (脚) 中的 ee</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">feet</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('feet')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">meet</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('meet')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">green</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('green')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Meet me with your green feet.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Meet me with your green feet.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 7 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">i-e</span>
+                            <button class="pronunciation-btn" onclick="speak('i-e')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "自行车" (bike) 中的 i-e</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">bike</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('bike')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">like</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('like')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">kite</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('kite')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: I like to ride my bike with a kite.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('I like to ride my bike with a kite.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 8 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">igh</span>
+                            <button class="pronunciation-btn" onclick="speak('igh')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "高的" (high) 中的 igh</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">high</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('high')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">night</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('night')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">light</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('light')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: At night, the light is high.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('At night, the light is high.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 9 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">y</span>
+                            <button class="pronunciation-btn" onclick="speak('y')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "天空" (sky) 中的 y</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">sky</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('sky')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">fly</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('fly')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">cry</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cry')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Why do you cry when you fly in the sky?</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Why do you cry when you fly in the sky?')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 10 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">o-e</span>
+                            <button class="pronunciation-btn" onclick="speak('o-e')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "骨头" (bone) 中的 o-e</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">bone</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('bone')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">home</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('home')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">note</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('note')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: I wrote a note at home about the bone.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('I wrote a note at home about the bone.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 11 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">oa</span>
+                            <button class="pronunciation-btn" onclick="speak('oa')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "船" (boat) 中的 oa</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">boat</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('boat')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">coat</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('coat')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">road</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('road')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The boat on the road has a coat.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The boat on the road has a coat.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 12 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ow</span>
+                            <button class="pronunciation-btn" onclick="speak('ow')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "雪" (snow) 中的 ow</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">snow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('snow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">grow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('grow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">blow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('blow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The wind will blow and make the snow grow.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The wind will blow and make the snow grow.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 13 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">u-e</span>
+                            <button class="pronunciation-btn" onclick="speak('u-e')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "管" (tube) 中的 u-e</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">tube</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('tube')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">cube</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cube')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">mute</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('mute')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The mute cube is in the tube.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The mute cube is in the tube.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 14 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ue</span>
+                            <button class="pronunciation-btn" onclick="speak('ue')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "蓝色" (blue) 中的 ue</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">blue</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('blue')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">glue</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('glue')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">clue</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('clue')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The blue glue gives a clue.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The blue glue gives a clue.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 长元音组合 15 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ui</span>
+                            <button class="pronunciation-btn" onclick="speak('ui')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "果汁" (juice) 中的 ui</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">juice</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('juice')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">fruit</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('fruit')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">suit</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('suit')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The fruit juice stains my suit.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The fruit juice stains my suit.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R控制的元音 -->
+            <div class="mb-10">
+                <h3 class="category-title">R控制的元音 (R-Controlled Vowels)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- R控制的元音组合 1 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ar</span>
+                            <button class="pronunciation-btn" onclick="speak('ar')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "车" (car) 中的 ar</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">car</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('car')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">far</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('far')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">star</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('star')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The car is far from the star.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The car is far from the star.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- R控制的元音组合 2 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">er</span>
+                            <button class="pronunciation-btn" onclick="speak('er')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "她" (her) 中的 er</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">her</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('her')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">term</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('term')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">fern</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('fern')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Her term project is about a fern.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Her term project is about a fern.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- R控制的元音组合 3 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ir</span>
+                            <button class="pronunciation-btn" onclick="speak('ir')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "鸟" (bird) 中的 ir</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">bird</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('bird')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">shirt</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('shirt')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">girl</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('girl')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The girl in a shirt saw a bird.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The girl in a shirt saw a bird.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- R控制的元音组合 4 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">or</span>
+                            <button class="pronunciation-btn" onclick="speak('or')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "叉子" (fork) 中的 or</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">fork</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('fork')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">horn</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('horn')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">born</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('born')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: He was born with a horn and a fork.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('He was born with a horn and a fork.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- R控制的元音组合 5 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ur</span>
+                            <button class="pronunciation-btn" onclick="speak('ur')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "汉堡" (hamburger) 中的 ur</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">hamburger</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('hamburger')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">nurse</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('nurse')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">burn</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('burn')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The nurse will burn the hamburger.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The nurse will burn the hamburger.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 双元音/Diphthongs -->
+            <div class="mb-10">
+                <h3 class="category-title">双元音 (Diphthongs)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 双元音组合 1 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">au</span>
+                            <button class="pronunciation-btn" onclick="speak('au')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "汽车" (auto) 中的 au</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">auto</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('auto')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">ause</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('ause')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">author</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('author')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The author wrote about the auto cause.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The author wrote about the auto cause.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 双元音组合 2 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">aw</span>
+                            <button class="pronunciation-btn" onclick="speak('aw')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "法律" (law) 中的 aw</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">law</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('law')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">saw</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('saw')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">draw</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('draw')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: I saw the law and had to draw it.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('I saw the law and had to draw it.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 双元音组合 3 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">oi</span>
+                            <button class="pronunciation-btn" onclick="speak('oi')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "油" (oil) 中的 oi</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">oil</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('oil')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">coin</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('coin')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">join</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('join')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Join me to get the coin with oil.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Join me to get the coin with oil.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 双元音组合 4 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">oy</span>
+                            <button class="pronunciation-btn" onclick="speak('oy')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "玩具" (toy) 中的 oy</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">toy</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('toy')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">boy</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('boy')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">enjoy</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('enjoy')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The boy will enjoy his new toy.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The boy will enjoy his new toy.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 双元音组合 5 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ow</span>
+                            <button class="pronunciation-btn" onclick="speak('ow')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "牛" (cow) 中的 ow</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">cow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">how</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('how')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">now</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('now')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Now, how does the cow eat grass?</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Now, how does the cow eat grass?')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 双元音组合 6 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">ou</span>
+                            <button class="pronunciation-btn" onclick="speak('ou')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "房子" (house) 中的 ou</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">house</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('house')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">mouse</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('mouse')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">out</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('out')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The mouse ran out of the house.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The mouse ran out of the house.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 辅音组合部分 -->
+        <section id="consonants" class="mb-16">
+            <h2 class="section-title">辅音组合</h2>
+            <p class="text-lg mb-8">辅音组合由两个或三个辅音字母组成，发一个音。以下是常见的辅音组合及其发音规则。</p>
+
+            <!-- 常见辅音组合1 -->
+            <div class="mb-10">
+                <h3 class="category-title">常见辅音组合 (1)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 辅音组合 1 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">bl</span>
+                            <button class="pronunciation-btn" onclick="speak('bl')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "蓝色" (blue) 中的 bl</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">blue</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('blue')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">black</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('black')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">blow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('blow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The black bird can blow blue smoke.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The black bird can blow blue smoke.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 2 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">br</span>
+                            <button class="pronunciation-btn" onclick="speak('br')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "棕色" (brown) 中的 br</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">brown</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('brown')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">bread</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('bread')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">brush</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('brush')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Brush the brown bread with butter.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Brush the brown bread with butter.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 3 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">cl</span>
+                            <button class="pronunciation-btn" onclick="speak('cl')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "钟" (clock) 中的 cl</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">clock</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('clock')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">class</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('class')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">clean</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('clean')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Clean the clock before class starts.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Clean the clock before class starts.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 4 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">cr</span>
+                            <button class="pronunciation-btn" onclick="speak('cr')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "哭" (cry) 中的 cr</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">cry</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cry')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">cross</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('cross')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">crash</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('crash')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Don't cry when you cross the crash site.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Don\'t cry when you cross the crash site.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 5 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">dr</span>
+                            <button class="pronunciation-btn" onclick="speak('dr')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "喝" (drink) 中的 dr</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">drink</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('drink')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">drive</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('drive')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">dress</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('dress')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Drive to buy a dress and drink juice.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Drive to buy a dress and drink juice.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 6 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">fl</span>
+                            <button class="pronunciation-btn" onclick="speak('fl')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "飞" (fly) 中的 fl</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">fly</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('fly')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">flag</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('flag')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">flower</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('flower')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: A fly on the flag near the flower.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('A fly on the flag near the flower.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常见辅音组合2 -->
+            <div class="mb-10">
+                <h3 class="category-title">常见辅音组合 (2)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 辅音组合 7 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">fr</span>
+                            <button class="pronunciation-btn" onclick="speak('fr')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "朋友" (friend) 中的 fr</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">friend</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('friend')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">fruit</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('fruit')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">frog</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('frog')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: My friend ate fruit with a frog.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('My friend ate fruit with a frog.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 8 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">gl</span>
+                            <button class="pronunciation-btn" onclick="speak('gl')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "玻璃" (glass) 中的 gl</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">glass</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('glass')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">glad</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('glad')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">glow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('glow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: I'm glad the glass can glow at night.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('I\'m glad the glass can glow at night.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 9 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">gr</span>
+                            <button class="pronunciation-btn" onclick="speak('gr')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "绿色" (green) 中的 gr</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">green</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('green')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">grass</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('grass')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">grow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('grow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Green grass will grow in the garden.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Green grass will grow in the garden.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 10 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">pl</span>
+                            <button class="pronunciation-btn" onclick="speak('pl')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "玩" (play) 中的 pl</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">play</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('play')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">plant</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('plant')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">plate</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('plate')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Let's play with a plant on a plate.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Let\'s play with a plant on a plate.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 11 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">pr</span>
+                            <button class="pronunciation-btn" onclick="speak('pr')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "价格" (price) 中的 pr</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">price</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('price')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">present</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('present')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">print</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('print')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Print the price of the present, please.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Print the price of the present, please.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 12 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">sc</span>
+                            <button class="pronunciation-btn" onclick="speak('sc')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "范围" (scope) 中的 sc</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">scope</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('scope')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">school</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('school')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">science</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('science')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Science class at school has a scope.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Science class at school has a scope.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常见辅音组合3 -->
+            <div class="mb-10">
+                <h3 class="category-title">常见辅音组合 (3)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 辅音组合 13 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">sk</span>
+                            <button class="pronunciation-btn" onclick="speak('sk')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "天空" (sky) 中的 sk</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">sky</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('sky')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">skate</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('skate')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">skill</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('skill')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: To skate in the sky needs special skill.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('To skate in the sky needs special skill.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 14 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">sl</span>
+                            <button class="pronunciation-btn" onclick="speak('sl')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "慢的" (slow) 中的 sl</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">slow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('slow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">slide</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('slide')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">sleep</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('sleep')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Slow down to slide and sleep well.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Slow down to slide and sleep well.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 15 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">sm</span>
+                            <button class="pronunciation-btn" onclick="speak('sm')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "小的" (small) 中的 sm</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">small</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('small')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">smile</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('smile')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">smoke</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('smoke')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: A small smile can stop the smoke.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('A small smile can stop the smoke.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 16 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">sn</span>
+                            <button class="pronunciation-btn" onclick="speak('sn')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "雪" (snow) 中的 sn</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">snow</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('snow')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">snake</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('snake')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">snack</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('snack')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: A snake eats a snack in the snow.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('A snake eats a snack in the snow.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 17 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">sp</span>
+                            <button class="pronunciation-btn" onclick="speak('sp')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "运动" (sport) 中的 sp</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">sport</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('sport')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">space</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('space')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">spoon</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('spoon')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: A spoon for sport in outer space.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('A spoon for sport in outer space.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 18 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">st</span>
+                            <button class="pronunciation-btn" onclick="speak('st')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "星星" (star) 中的 st</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">star</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('star')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">stop</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('stop')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">store</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('store')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Stop to see the star near the store.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Stop to see the star near the store.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常见辅音组合4 -->
+            <div class="mb-10">
+                <h3 class="category-title">常见辅音组合 (4)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 辅音组合 19 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">sw</span>
+                            <button class="pronunciation-btn" onclick="speak('sw')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "游泳" (swim) 中的 sw</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">swim</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('swim')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">sweet</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('sweet')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">swing</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('swing')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: We swing to eat sweet food when we swim.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('We swing to eat sweet food when we swim.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 20 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">th</span>
+                            <button class="pronunciation-btn" onclick="speak('th')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "这个" (this) 中的 th</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">this</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('this')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">that</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('that')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">them</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('them')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: This and that belong to them.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('This and that belong to them.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 21 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">th</span>
+                            <button class="pronunciation-btn" onclick="speak('th')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "思考" (think) 中的 th</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">think</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('think')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">thank</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('thank')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">three</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('three')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: I think you should thank three people.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('I think you should thank three people.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常见辅音组合5 -->
+            <div class="mb-10">
+                <h3 class="category-title">常见辅音组合 (5)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 辅音组合 22 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">tr</span>
+                            <button class="pronunciation-btn" onclick="speak('tr')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "火车" (train) 中的 tr</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">train</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('train')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">tree</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('tree')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">truck</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('truck')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: The truck hit a tree near the train.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('The truck hit a tree near the train.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 23 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">tw</span>
+                            <button class="pronunciation-btn" onclick="speak('tw')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "二" (two) 中的 tw</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">two</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('two')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">twist</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('twist')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">twin</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('twin')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Two twins can twist the rope.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Two twins can twist the rope.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 24 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">wh</span>
+                            <button class="pronunciation-btn" onclick="speak('wh')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "什么" (what) 中的 wh</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">what</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('what')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">where</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('where')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">when</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('when')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: What, where and when will we meet?</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('What, where and when will we meet?')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- 辅音组合 25 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl font-bold mr-3">wr</span>
+                            <button class="pronunciation-btn" onclick="speak('wr')">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mb-3">发音如 "写" (write) 中的 wr</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="font-medium">write</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('write')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">wrong</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('wrong')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium">wrap</span>
+                                <button class="pronunciation-btn ml-2" onclick="speak('wrap')">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500">例句: Write that it's wrong to wrap it tight.</p>
+                        <button class="pronunciation-btn mt-1" onclick="speak('Write that it\'s wrong to wrap it tight.')">
+                            <i class="fa fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 练习部分 -->
+        <section id="practice" class="mb-16">
+            <h2 class="section-title">自然拼读练习</h2>
+            <p class="text-lg mb-8">通过以下练习巩固你所学的自然拼读知识。选择正确的答案，或点击喇叭图标听取发音后选择对应的单词。</p>
+
+            <!-- 练习类型1: 听力选择 -->
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8 mb-10">
+                <h3 class="category-title">听力选择题</h3>
+                <p class="mb-6">点击喇叭听取发音，然后从选项中选择正确的单词。</p>
+
+                <div class="space-y-8">
+                    <!-- 练习1 -->
+                    <div class="p-5 border border-gray-200 rounded-lg">
+                        <div class="mb-4">
+                            <p class="font-medium mb-2">1. 点击听取发音，选择正确的单词：</p>
+                            <button class="pronunciation-btn" onclick="speak('ship')">
+                                <i class="fa fa-volume-up text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">sheep</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, true)">ship</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">shop</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">shape</button>
+                        </div>
+                        <div class="result-message mt-3 hidden"></div>
+                    </div>
+
+                    <!-- 练习2 -->
+                    <div class="p-5 border border-gray-200 rounded-lg">
+                        <div class="mb-4">
+                            <p class="font-medium mb-2">2. 点击听取发音，选择正确的单词：</p>
+                            <button class="pronunciation-btn" onclick="speak('train')">
+                                <i class="fa fa-volume-up text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">brain</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">plane</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, true)">train</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">chain</button>
+                        </div>
+                        <div class="result-message mt-3 hidden"></div>
+                    </div>
+
+                    <!-- 练习3 -->
+                    <div class="p-5 border border-gray-200 rounded-lg">
+                        <div class="mb-4">
+                            <p class="font-medium mb-2">3. 点击听取发音，选择正确的单词：</p>
+                            <button class="pronunciation-btn" onclick="speak('night')">
+                                <i class="fa fa-volume-up text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">knight</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, true)">night</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">light</button>
+                            <button class="p-3 border border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors" onclick="checkAnswer(this, false)">might</button>
+                        </div>
+                        <div class="result-message mt-3 hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 练习类型2: 匹配题 -->
+            <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <h3 class="category-title">字母组合匹配题</h3>
+                <p class="mb-6">将左侧的字母组合与右侧包含该组合的单词进行匹配。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="p-4 bg-blue-50 rounded-lg flex items-center justify-between draggable" draggable="true" data-pair="ai">
+                            <span class="font-medium">ai</span>
+                            <i class="fa fa-arrows text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg flex items-center justify-between draggable" draggable="true" data-pair="sh">
+                            <span class="font-medium">sh</span>
+                            <i class="fa fa-arrows text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg flex items-center justify-between draggable" draggable="true" data-pair="ou">
+                            <span class="font-medium">ou</span>
+                            <i class="fa fa-arrows text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg flex items-center justify-between draggable" draggable="true" data-pair="th">
+                            <span class="font-medium">th</span>
+                            <i class="fa fa-arrows text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg flex items-center justify-between draggable" draggable="true" data-pair="igh">
+                            <span class="font-medium">igh</span>
+                            <i class="fa fa-arrows text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 bg-orange-50 rounded-lg flex items-center justify-between droppable" data-pair="sh">
+                            <span class="font-medium">shop</span>
+                            <i class="fa fa-exchange text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg flex items-center justify-between droppable" data-pair="ai">
+                            <span class="font-medium">rain</span>
+                            <i class="fa fa-exchange text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg flex items-center justify-between droppable" data-pair="igh">
+                            <span class="font-medium">high</span>
+                            <i class="fa fa-exchange text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg flex items-center justify-between droppable" data-pair="th">
+                            <span class="font-medium">think</span>
+                            <i class="fa fa-exchange text-gray-400"></i>
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg flex items-center justify-between droppable" data-pair="ou">
+                            <span class="font-medium">house</span>
+                            <i class="fa fa-exchange text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button id="check-matches" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors">
+                        检查匹配结果
+                    </button>
+                    <div id="match-result" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-book text-primary text-3xl mr-3"></i>
+                        <h2 class="text-2xl font-bold">自然拼读法学习</h2>
+                    </div>
+                    <p class="text-gray-400">
+                        为初学者设计的英语发音学习工具，帮助你掌握字母组合的发音规则，提高英语听说读写能力。
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#intro" class="hover:text-primary transition-colors">简介</a></li>
+                        <li><a href="#vowels" class="hover:text-primary transition-colors">元音组合</a></li>
+                        <li><a href="#consonants" class="hover:text-primary transition-colors">辅音组合</a></li>
+                        <li><a href="#practice" class="hover:text-primary transition-colors">练习</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">联系我们</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-primary mr-2"></i>
+                            <a href="mailto:info@phonics-learning.com" class="hover:text-primary transition-colors">info@phonics-learning.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-primary mr-2"></i>
+                            <span>+123 456 7890</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 自然拼读法学习网站. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动菜单（如果打开）
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // 发音功能
+        function speak(text) {
+            // 停止任何正在进行的语音
+            window.speechSynthesis.cancel();
+            
+            // 创建新的语音实例
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9; // 稍微放慢速度，便于学习
+            
+            // 播放语音
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // 练习答案检查
+        function checkAnswer(button, isCorrect) {
+            // 重置同一题中的所有按钮样式
+            const buttons = button.parentElement.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500');
+            });
+            
+            // 显示结果消息
+            const resultMessage = button.parentElement.nextElementSibling;
+            resultMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
+            
+            if (isCorrect) {
+                button.classList.add('bg-green-100', 'border-green-500');
+                resultMessage.textContent = '正确！做得好！';
+                resultMessage.classList.add('text-green-600');
+            } else {
+                button.classList.add('bg-red-100', 'border-red-500');
+                resultMessage.textContent = '不正确，请再试一次。';
+                resultMessage.classList.add('text-red-600');
+            }
+        }
+
+        // 匹配练习功能
+        let draggedItem = null;
+        
+        document.querySelectorAll('.draggable').forEach(item => {
+            item.addEventListener('dragstart', function() {
+                draggedItem = this;
+                setTimeout(() => this.classList.add('opacity-50'), 0);
+            });
+            
+            item.addEventListener('dragend', function() {
+                draggedItem = null;
+                this.classList.remove('opacity-50');
+            });
+        });
+        
+        document.querySelectorAll('.droppable').forEach(item => {
+            item.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('bg-orange-100');
+            });
+            
+            item.addEventListener('dragleave', function() {
+                this.classList.remove('bg-orange-100');
+            });
+            
+            item.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('bg-orange-100');
+                
+                if (draggedItem.getAttribute('data-pair') === this.getAttribute('data-pair')) {
+                    this.classList.add('bg-green-100', 'border', 'border-green-500');
+                    draggedItem.classList.add('bg-green-100', 'border', 'border-green-500');
+                    draggedItem.setAttribute('draggable', 'false');
+                } else {
+                    this.classList.add('bg-red-100', 'border', 'border-red-500');
+                    setTimeout(() => {
+                        this.classList.remove('bg-red-100', 'border', 'border-red-500');
+                    }, 1000);
+                }
+            });
+        });
+        
+        document.getElementById('check-matches').addEventListener('click', function() {
+            const allMatched = document.querySelectorAll('.draggable.bg-green-100').length === 5;
+            const resultElement = document.getElementById('match-result');
+            
+            resultElement.classList.remove('hidden', 'text-green-600', 'text-red-600', 'bg-green-100', 'bg-red-100');
+            
+            if (allMatched) {
+                resultElement.textContent = '恭喜！所有匹配都正确！';
+                resultElement.classList.add('text-green-600', 'bg-green-100', 'p-3', 'rounded-lg');
+            } else {
+                resultElement.textContent = '还有错误，请检查你的匹配。';
+                resultElement.classList.add('text-red-600', 'bg-red-100', 'p-3', 'rounded-lg');
+            }
+        });
+    </script>
+</body>
+</html>
